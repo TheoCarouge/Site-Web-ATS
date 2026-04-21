@@ -222,7 +222,7 @@ export default function Home() {
 
         <div className="mt-8 text-center">
           <a
-            href="mailto:arttextilestudio.30@gmail.com"
+            href="mailto:arttextilestudio30@gmail.com"
             className="inline-flex items-center gap-2 bg-zinc-900 text-white px-8 py-3 text-sm font-bold uppercase tracking-wide hover:bg-zinc-700 transition"
           >
             Demander un devis gratuit <ArrowRight className="w-4 h-4" />
@@ -266,7 +266,7 @@ export default function Home() {
             Je commence <ArrowRight className="w-4 h-4" />
           </Link>
           <a
-            href="mailto:arttextilestudio.30@gmail.com"
+            href="mailto:arttextilestudio30@gmail.com"
             className="inline-flex items-center gap-2 border border-zinc-600 px-8 py-3.5 text-sm font-bold uppercase tracking-wide text-white hover:border-white transition"
           >
             Demander un devis
@@ -294,7 +294,7 @@ export default function Home() {
             <p className="text-white font-semibold text-xs uppercase tracking-wide mb-3">Contact</p>
             <ul className="space-y-2 text-xs">
               <li className="flex items-center gap-2"><Phone className="w-3.5 h-3.5 shrink-0" /><a href="tel:0749192404" className="hover:text-white transition">07 49 19 24 04</a></li>
-              <li className="flex items-center gap-2"><Mail className="w-3.5 h-3.5 shrink-0" /><a href="mailto:arttextilestudio.30@gmail.com" className="hover:text-white transition">arttextilestudio.30@gmail.com</a></li>
+              <li className="flex items-center gap-2"><Mail className="w-3.5 h-3.5 shrink-0" /><a href="mailto:arttextilestudio30@gmail.com" className="hover:text-white transition">arttextilestudio30@gmail.com</a></li>
               <li className="flex items-center gap-2"><Instagram className="w-3.5 h-3.5 shrink-0" /><span>@ats3.0</span></li>
             </ul>
           </div>
@@ -304,7 +304,7 @@ export default function Home() {
           </div>
         </div>
         <div className="mx-auto max-w-7xl mt-8 pt-6 border-t border-zinc-800 text-[11px] text-zinc-600 flex flex-wrap justify-between gap-2">
-          <span>© {new Date().getFullYear()} Art &amp; Textile Studio — Tous droits réservés</span>
+          <span>© {new Date().getFullYear()} Art &amp; Textile Studio — Tous droits réservés · Développé par Théo Carouge</span>
           <span>Fait avec ♥ en France</span>
         </div>
       </footer>

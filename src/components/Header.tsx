@@ -22,7 +22,7 @@ export default function Header() {
       <div className="hidden md:flex items-center justify-center gap-8 bg-zinc-950 px-6 py-1.5 text-[11px] text-zinc-400">
         <span>📍 Bellegarde, Gard (30)</span>
         <span>📞 07 49 19 24 04</span>
-        <span>✉️ arttextilestudio.30@gmail.com</span>
+        <span>✉️ arttextilestudio30@gmail.com</span>
         <span>📸 @ats3.0</span>
       </div>
 
@@ -96,7 +96,7 @@ export default function Header() {
           </nav>
           <div className="px-6 py-4 border-t border-zinc-700 space-y-1 text-xs text-zinc-400">
             <p>📞 07 49 19 24 04</p>
-            <p>✉️ arttextilestudio.30@gmail.com</p>
+            <p>✉️ arttextilestudio30@gmail.com</p>
           </div>
         </div>
       )}

@@ -261,7 +261,7 @@ export default function Catalogue() {
           Vous ne trouvez pas ce que vous cherchez ? Contactez-nous.
         </p>
         <a
-          href="mailto:arttextilestudio.30@gmail.com"
+          href="mailto:arttextilestudio30@gmail.com"
           className="inline-flex items-center gap-2 border border-zinc-600 px-8 py-3 text-xs font-bold uppercase tracking-wide hover:border-white transition"
         >
           Demander un produit <ArrowRight className="w-3.5 h-3.5" />

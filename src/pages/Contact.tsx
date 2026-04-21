@@ -32,7 +32,7 @@ export default function Contact() {
         ? `Suivi de commande — ${form.nom}`
         : `Contact — ${form.nom}`
     );
-    window.location.href = `mailto:arttextilestudio.30@gmail.com?subject=${subject}&body=${body}`;
+    window.location.href = `mailto:arttextilestudio30@gmail.com?subject=${subject}&body=${body}`;
     setSent(true);
   }
 
@@ -203,8 +203,8 @@ export default function Contact() {
                   </div>
                   <div>
                     <p className="text-xs font-bold uppercase tracking-wide text-zinc-400 mb-0.5">Email</p>
-                    <a href="mailto:arttextilestudio.30@gmail.com" className="text-sm font-semibold text-zinc-900 hover:underline break-all">
-                      arttextilestudio.30@gmail.com
+                    <a href="mailto:arttextilestudio30@gmail.com" className="text-sm font-semibold text-zinc-900 hover:underline break-all">
+                      arttextilestudio30@gmail.com
                     </a>
                   </div>
                 </li>

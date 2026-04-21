@@ -21,18 +21,12 @@ const BRODERIE_ROWS = [
 ];
 
 const EXEMPLES_DTF = [
-  { label: "Logo poitrine (≤ 10 cm)", prix: "À partir de 4 €" },
+  { label: "Logo cœur (≤ 8 cm)", prix: "À partir de 5 €" },
   { label: "Dos complet (≤ 30 cm)", prix: "À partir de 8 €" },
   { label: "Manche (≤ 8 cm)", prix: "À partir de 3 €" },
   { label: "Full front (≤ A4)", prix: "À partir de 10 €" },
 ];
 
-const EXEMPLES_BRODERIE = [
-  { label: "Logo poitrine (≤ 8 cm)", prix: "À partir de 6 €" },
-  { label: "Dos complet (≤ 20 cm)", prix: "À partir de 18 €" },
-  { label: "Casquette (≤ 6 cm)", prix: "À partir de 5 €" },
-  { label: "Badge / Écusson", prix: "À partir de 8 €" },
-];
 
 const FAQ = [
   {
@@ -125,7 +119,7 @@ export default function Tarifs() {
 
             {/* Exemples de prix */}
             <div>
-              <p className="mb-3 text-xs font-semibold uppercase tracking-wide text-zinc-400">Exemples de marquage (hors support)</p>
+              <p className="mb-3 text-xs font-semibold uppercase tracking-wide text-zinc-400">Remplacer par DTF seul (à floquer vous même)</p>
               <div className="space-y-3">
                 {EXEMPLES_DTF.map(ex => (
                   <div key={ex.label} className="flex items-center justify-between border border-zinc-100 px-4 py-3">
@@ -186,20 +180,30 @@ export default function Tarifs() {
               </table>
             </div>
 
-            <div>
-              <p className="mb-3 text-xs font-semibold uppercase tracking-wide text-zinc-400">Exemples de marquage (hors support)</p>
-              <div className="space-y-3">
-                {EXEMPLES_BRODERIE.map(ex => (
-                  <div key={ex.label} className="flex items-center justify-between border border-zinc-100 px-4 py-3">
-                    <div className="flex items-center gap-2">
-                      <CheckCircle2 className="w-4 h-4 text-zinc-400 shrink-0" />
-                      <span className="text-sm text-zinc-700">{ex.label}</span>
-                    </div>
-                    <span className="text-sm font-bold text-zinc-900 shrink-0 ml-4">{ex.prix}</span>
-                  </div>
-                ))}
+            {/* Infos broderie */}
+            <div className="bg-zinc-50 border border-zinc-100 p-6 flex flex-col gap-5">
+              <div>
+                <p className="text-xs font-semibold uppercase tracking-widest text-zinc-400 mb-3">Pourquoi la broderie ?</p>
+                <ul className="space-y-3">
+                  {[
+                    { t: "Rendu premium", d: "Relief et matière inégalés, idéal pour les logos d'entreprise." },
+                    { t: "Résistant au lavage", d: "Les fils ne s'effacent pas, même après des centaines de lavages." },
+                    { t: "Numérisation offerte", d: "Votre logo est vectorisé gratuitement pour la production." },
+                    { t: "Sur tous supports", d: "Polos, vestes, casquettes, sacs, patches…" },
+                  ].map(({ t, d }) => (
+                    <li key={t} className="flex items-start gap-3">
+                      <CheckCircle2 className="w-4 h-4 text-zinc-900 mt-0.5 shrink-0" />
+                      <div>
+                        <span className="text-sm font-bold text-zinc-900">{t} — </span>
+                        <span className="text-sm text-zinc-500">{d}</span>
+                      </div>
+                    </li>
+                  ))}
+                </ul>
               </div>
-              <p className="mt-3 text-[11px] text-zinc-400">* Par emplacement, pour 20 pièces. Numérisation logo offerte.</p>
+              <div className="border-t border-zinc-200 pt-4">
+                <p className="text-[11px] text-zinc-400">Devis personnalisé selon le nombre de points et l'emplacement. Contactez-nous pour un chiffrage précis.</p>
+              </div>
             </div>
           </div>
         </section>
@@ -230,11 +234,11 @@ export default function Tarifs() {
         </p>
         <div className="flex flex-wrap justify-center gap-4">
           <a
-            href="mailto:arttextilestudio.30@gmail.com"
+            href="mailto:arttextilestudio30@gmail.com"
             className="inline-flex items-center gap-2 bg-white text-zinc-900 px-8 py-3.5 text-sm font-bold uppercase tracking-wide hover:bg-zinc-100 transition"
           >
             <Mail className="w-4 h-4" />
-            arttextilestudio.30@gmail.com
+            arttextilestudio30@gmail.com
           </a>
           <a
             href="tel:0749192404"

@@ -15,12 +15,12 @@ export default function ProductPreview() {
   const fabricRef = useRef<fabric.Canvas | null>(null);
   // Configuration for Print Areas (Percentage based relative to 500x500 canvas)
   const PRINT_AREAS: Record<string, { top: string, left: string, width: string, height: string }> = {
-    front: { top: '28%', left: '33%', width: '34%', height: '40%' }, // Chest (Restricted)
-    back: { top: '20%', left: '25%', width: '50%', height: '55%' }, // Large Back
-    left: { top: '35%', left: '42%', width: '15%', height: '40%' }, // Sleeve (approx)
-    right: { top: '35%', left: '42%', width: '15%', height: '40%' }, // Sleeve
-    hoodie_left: { top: '35%', left: '35%', width: '30%', height: '30%' }, // Hood side (adjusted)
-    hoodie_right: { top: '35%', left: '35%', width: '30%', height: '30%' }, // Hood side (adjusted)
+    front: { top: '18%', left: '22%', width: '56%', height: '62%' }, // Full front
+    back:  { top: '12%', left: '18%', width: '64%', height: '72%' }, // Full back
+    left:  { top: '28%', left: '36%', width: '24%', height: '48%' }, // Sleeve
+    right: { top: '28%', left: '40%', width: '24%', height: '48%' }, // Sleeve
+    hoodie_left:  { top: '30%', left: '30%', width: '38%', height: '38%' }, // Hood side
+    hoodie_right: { top: '30%', left: '30%', width: '38%', height: '38%' }, // Hood side
     composition: { top: '0%', left: '0%', width: '0%', height: '0%' }, // None
   };
 
