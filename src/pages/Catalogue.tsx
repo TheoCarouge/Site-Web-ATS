@@ -2,7 +2,7 @@ import { useEffect, useState, useMemo } from "react";
 import { Link } from "react-router-dom";
 import { ArrowRight, SlidersHorizontal, X } from "lucide-react";
 import Header from "@/components/Header";
-import { fetchAllProducts } from "@/lib/shopify";
+import { fetchCollectionProducts } from "@/lib/shopify";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -23,23 +23,6 @@ interface Product {
   }[];
   options?: { name: string; values: string[] }[];
 }
-
-// ─── Static fallback catalogue ────────────────────────────────────────────────
-
-const FALLBACK: Product[] = [
-  { id: "1", title: "T-shirt manches courtes", handle: "tshirt", availableForSale: true, productType: "T-shirts", images: [{ src: "" }], variants: [{ id: "v1", title: "Default", availableForSale: true, price: { amount: "12.00" }, selectedOptions: [] }] },
-  { id: "2", title: "T-shirt bio oversize", handle: "tshirt-bio", availableForSale: true, productType: "T-shirts", images: [{ src: "" }], variants: [{ id: "v2", title: "Default", availableForSale: true, price: { amount: "15.00" }, selectedOptions: [] }] },
-  { id: "3", title: "Polo personnalisable", handle: "polo", availableForSale: true, productType: "Polos", images: [{ src: "" }], variants: [{ id: "v3", title: "Default", availableForSale: true, price: { amount: "18.00" }, selectedOptions: [] }] },
-  { id: "4", title: "Chemise personnalisable", handle: "chemise", availableForSale: true, productType: "Chemises", images: [{ src: "" }], variants: [{ id: "v4", title: "Default", availableForSale: true, price: { amount: "22.00" }, selectedOptions: [] }] },
-  { id: "5", title: "Sweat à capuche", handle: "hoodie", availableForSale: true, productType: "Sweats", images: [{ src: "" }], variants: [{ id: "v5", title: "Default", availableForSale: true, price: { amount: "28.00" }, selectedOptions: [] }] },
-  { id: "6", title: "Pull molletonné", handle: "pull", availableForSale: true, productType: "Sweats", images: [{ src: "" }], variants: [{ id: "v6", title: "Default", availableForSale: true, price: { amount: "30.00" }, selectedOptions: [] }] },
-  { id: "7", title: "Veste softshell", handle: "veste", availableForSale: true, productType: "Vestes", images: [{ src: "" }], variants: [{ id: "v7", title: "Default", availableForSale: true, price: { amount: "42.00" }, selectedOptions: [] }] },
-  { id: "8", title: "Doudoune sans manches", handle: "doudoune", availableForSale: true, productType: "Vestes", images: [{ src: "" }], variants: [{ id: "v8", title: "Default", availableForSale: true, price: { amount: "35.00" }, selectedOptions: [] }] },
-  { id: "9", title: "Casquette brodée", handle: "casquette", availableForSale: true, productType: "Accessoires", images: [{ src: "" }], variants: [{ id: "v9", title: "Default", availableForSale: true, price: { amount: "14.00" }, selectedOptions: [] }] },
-  { id: "10", title: "Tote bag personnalisé", handle: "totebag", availableForSale: false, productType: "Accessoires", images: [{ src: "" }], variants: [{ id: "v10", title: "Default", availableForSale: false, price: { amount: "10.00" }, selectedOptions: [] }] },
-  { id: "11", title: "Tablier de travail", handle: "tablier", availableForSale: true, productType: "Professionnel", images: [{ src: "" }], variants: [{ id: "v11", title: "Default", availableForSale: true, price: { amount: "20.00" }, selectedOptions: [] }] },
-  { id: "12", title: "Blouse de travail", handle: "blouse", availableForSale: true, productType: "Professionnel", images: [{ src: "" }], variants: [{ id: "v12", title: "Default", availableForSale: true, price: { amount: "25.00" }, selectedOptions: [] }] },
-];
 
 const SORT_OPTIONS = [
   { label: "Défaut", value: "default" },
@@ -67,15 +50,19 @@ function formatPrice(p: Product): string {
 export default function Catalogue() {
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
   const [activeCategory, setActiveCategory] = useState("Tous");
   const [sort, setSort] = useState("default");
   const [showUnavailable, setShowUnavailable] = useState(true);
   const [filtersOpen, setFiltersOpen] = useState(false);
 
   useEffect(() => {
-    fetchAllProducts()
-      .then((data: Product[]) => setProducts(data?.length ? data : FALLBACK))
-      .catch(() => setProducts(FALLBACK))
+    fetchCollectionProducts("creation-flocage-personnaliser")
+      .then((data: Product[]) => {
+        if (!data?.length) setError(true);
+        else setProducts(data);
+      })
+      .catch(() => setError(true))
       .finally(() => setLoading(false));
   }, []);
 
@@ -188,7 +175,17 @@ export default function Catalogue() {
         )}
 
         {/* ── Grid ─────────────────────────────────────────────────────────── */}
-        {loading ? (
+        {error ? (
+          <div className="py-24 text-center">
+            <p className="text-zinc-900 font-bold text-sm mb-2">Impossible de charger les produits.</p>
+            <p className="text-zinc-400 text-xs max-w-sm mx-auto">
+              Une erreur s'est produite lors de la connexion à Shopify. Vérifiez les variables d'environnement et redeployez.
+            </p>
+            <button onClick={() => { setError(false); setLoading(true); fetchCollectionProducts("creation-flocage-personnaliser").then(d => { if (!d?.length) setError(true); else setProducts(d); }).catch(() => setError(true)).finally(() => setLoading(false)); }} className="mt-6 text-xs font-bold uppercase tracking-wide text-zinc-900 underline underline-offset-4">
+              Réessayer
+            </button>
+          </div>
+        ) : loading ? (
           <div className="grid grid-cols-2 gap-6 sm:grid-cols-3 lg:grid-cols-4">
             {Array.from({ length: 8 }).map((_, i) => (
               <div key={i}>

@@ -5,6 +5,7 @@ import Cart from "@/pages/Cart";
 import Catalogue from "@/pages/Catalogue";
 import Tarifs from "@/pages/Tarifs";
 import Contact from "@/pages/Contact";
+import EditionLimitee from "@/pages/EditionLimitee";
 import { CartProvider } from "@/context/CartContext";
 
 function ComingSoon({ page }: { page: string }) {
@@ -29,6 +30,7 @@ export default function App() {
           <Route path="/catalogue" element={<Catalogue />} />
           <Route path="/tarifs" element={<Tarifs />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/edition-limitee" element={<EditionLimitee />} />
         </Routes>
       </Router>
     </CartProvider>

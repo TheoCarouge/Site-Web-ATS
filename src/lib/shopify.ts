@@ -175,6 +175,76 @@ export const fetchAllProducts = async () => {
   }
 };
 
+// Fetch products from a specific Shopify collection by handle
+export const fetchCollectionProducts = async (collectionHandle: string) => {
+  try {
+    const query = `
+      query getCollection($handle: String!) {
+        collection(handle: $handle) {
+          title
+          products(first: 50) {
+            edges {
+              node {
+                id
+                title
+                handle
+                availableForSale
+                productType
+                images(first: 1) {
+                  edges { node { url altText } }
+                }
+                variants(first: 100) {
+                  edges {
+                    node {
+                      id
+                      title
+                      availableForSale
+                      price { amount currencyCode }
+                      selectedOptions { name value }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    `;
+
+    const domain = import.meta.env.VITE_SHOPIFY_DOMAIN || 'your-shop-name.myshopify.com';
+    const token = import.meta.env.VITE_SHOPIFY_STOREFRONT_TOKEN || '';
+    const url = `https://${domain}/api/2024-01/graphql.json`;
+
+    const response = await fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-Shopify-Storefront-Access-Token': token,
+      },
+      body: JSON.stringify({ query, variables: { handle: collectionHandle } }),
+    });
+
+    const json = await response.json();
+    if (json.errors || !json.data?.collection) return [];
+
+    return json.data.collection.products.edges.map((e: any) => {
+      const node = e.node;
+      const variants = node.variants.edges.map((ve: any) => ve.node);
+      return {
+        id: node.id,
+        title: node.title,
+        handle: node.handle,
+        availableForSale: node.availableForSale,
+        productType: node.productType,
+        images: [{ src: node.images.edges[0]?.node?.url || '' }],
+        variants,
+      };
+    });
+  } catch {
+    return [];
+  }
+};
+
 export const createCheckout = async () => {
   try {
     return await client.checkout.create();
